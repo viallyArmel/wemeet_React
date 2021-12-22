@@ -1,13 +1,201 @@
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
+
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
+}
+li {
+  list-style: none;
+}
+ul a, span a{
+  text-decoration: none;
+  color: black;
+}
+a:hover{
+  color: black;
+  text-decoration: none;
+  
+}
+.footer {
+  background-color: lightgray;
+  height: 50px;
+  width: 100%;
+  position: fixed;
+  bottom: 0;
+}
+
+.footer .container .footer-item a li {
+  display: inline-flex;
+  margin: 0 10px;
+}
+
+.vide {
+  height: 260px;
+}
+#bar {
+  height: 60px;
+}
+.light-gold-color{
+  background-color: rgb(216, 172, 114);
+}
+.gold-color{
+  background-color: rgb(201, 142, 66);
+}
+
+.main-page {
+  height: 570px;
+  background-color: rgb(201, 142, 66);
+}
+
+.spaceTitle {
+  background-color: rgb(216, 172, 114);
+  padding-left: 200px;
+  height: 40px;
+  
+}
+.radius {
+  border-radius: 10px;
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+}
+.titleLogo {
+  font-family: Montserrat;
+
+}
+
+.form-group{
+  padding-top: 200px;
+  width: 40%;
+  margin: 0 auto;
+}
+
+.input {
+  padding-bottom: 12px;
+}
+
+.leftPosition {
+  position: relative;
+  left: 250px;
+}
+
+#compte {
+  position: relative;
+  left: 100px;
+}
+
+.body-home {
+  background-image: url('./resources/images/wemeet.png');
+  height: 400px;
+  margin: -8px -12px -8px -12px;
+  background-size: 1500px;
+}
+
+@media screen and (min-width: 900px) {
+  .input {
+    padding-bottom: 12px;
+    padding-left: 200px;
+    padding-right: 200px;
+  }
+  .leftPosition {
+    position: relative;
+    left: 600px;
+  }
+  #compte {
+    position: relative;
+    left: 300px;
+  }
+
+  
+}
+
+
+.my-btn {
+  color: black;
+  background-color: rgb(201, 142, 66);
+  width: 63px;
+  border: blanchedalmond;
+
+}
+
+.text-center {
+  margin: 0 auto;
+  padding-bottom: 16px;
+}
+
+h2, h1, h3, h4, h5 {
+  font-family: 'myFont';
+}
+
+.blockTitleLogo {
+  padding-top: 90px;
+  padding-left: 50px;
+  padding-right: 50px;
+  
+}
+
+@font-face {
+  font-family: 'myFont';
+  src: url(resources/font/myFont.otf);
+  font-style: normal;
+}
+
+.body {
+  font-family: 'myFont';
+}
+
+.my-nav-item {
+  justify-content: flex-end;
+}
+
+ul .nav-item:hover {
+  background-color: rgb(201, 142, 66);
+}
+
+.ico {
+  position: relative;
+  text-align: left;
+}
+.icon {
+  padding-right: 10px;
+}
+
+.div-footer {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+}
+
+/* home */
+
+
+#mini-form {
+  padding-left: 100px;
+  padding-right: 100px;
+}
+
+#titleHome{
+  padding-top: 50px;
+  padding-bottom: 50px;
+  color: aliceblue;
+  text-shadow: black 1px 1px 1px,
+  black -1px 1px 1px,
+  white -1px -1px 1px,
+  black 1px -1px 1px;
+}
+
+.item-event {
+  padding-top: 20px;
+}
+.activate {
+  text-shadow: goldenrod 1px 1px 1px,
+  goldenrod -1px 1px 1px,
+  black -1px -1px 1px,
+  black 1px -1px 1px;
+}
+.main-nav:hover {
+  color: gold;
+}
+
+.block-event {
+  padding-top: 52px;
 }
