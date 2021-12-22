@@ -30,8 +30,8 @@ export default class Home extends Component {
                         <div className='body-home'>
                             <div className='row mb-3'>
                                 <div className='container' id='titleHome'>
-                                    <p><h1>Salut Vially dag,</h1></p>
-                                    <p><h1>que veux-tu programmer ?</h1></p>
+                                    <h1>Salut Vially dag,</h1>
+                                    <h1>que veux-tu programmer ?</h1>
                                 </div>
                             </div>
                             <div className="row mb-3" id="mini-form">

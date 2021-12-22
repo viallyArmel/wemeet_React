@@ -20,8 +20,8 @@ a:hover{
   background-color: lightgray;
   height: 50px;
   width: 100%;
-  position: fixed;
-  bottom: 0;
+  position: initial;
+ 
 }
 
 .footer .container .footer-item a li {
@@ -197,5 +197,7 @@ ul .nav-item:hover {
 }
 
 .block-event {
-  padding-top: 52px;
+  margin-right: 10px;
+  margin-top: 20px;
 }
+

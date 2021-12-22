@@ -15,7 +15,7 @@ export default class Event extends Component {
             eventsToShow : [],
             loading : false,
             currentPage : 1,
-            eventsPerPage : 6,
+            eventsPerPage : 3,
         }
     }
 
@@ -34,35 +34,39 @@ export default class Event extends Component {
 
     
     render() {
-        const indexOfLastEvent = this.state.currentPage * this.state.currentPage;
+        const indexOfLastEvent = this.state.currentPage * this.state.eventsPerPage;
         const indexOfFirstEvent = this.state.indexOfLastEvent - this.state.eventsPerPage;
         const currentEvents = this.state.eventsToShow.splice(indexOfFirstEvent, indexOfLastEvent);
 
+        console.log(currentEvents);
         const paginate = (numPage) => this.setState({currentPage : numPage});
 
+        
         return (
             <div className='container'>
+                <div class="container block-event">
+                            <div class="row row-cols-4 ">
                 {
-                    currentEvents.map(event => {
+                    /*currentEvents.map(event => {
                         return (
-                            <div className='container-fluid row' key={'rowEvent'}>
-                                <div className='block-event'>
-                                    <div className='col col-sm-3'>
+                            <div className='container-fluid' key={event.id}>
+                                <div className='container block-event row row-cols-3 '>
+                                    <div className='col test'>
                                         <div className='shadow bg-body rounded'>
                                             <div className='col'>
-                                                <span className='row' id='labelEvent'>
+                                                <span className='row'>
                                                     <h4>{event.label}</h4>
                                                 </span>
-                                                <span className='row' id='cityName'>
+                                                <span className='row'>
                                                     <h5>`[${event.cityName}]`</h5>
                                                 </span>
                                                 <span className='row'>
-                                                    <span className='col' id='nbPersonnes'>
+                                                    <span className='col'>
                                                         <img className='icon' src={userIco} alt='user icon'/>
                                                         {event.nbParticipants}
                                                     </span>
-                                                    <span className='col' id='voir'>
-                                                        <Link to='/eventDetails' id='linkVoir'>voir</Link>
+                                                    <span className='col'>
+                                                        <Link to={'/eventDetails'}>voir</Link>
                                                     </span>
                                                 </span>
                                             </div>
@@ -73,6 +77,35 @@ export default class Event extends Component {
                         );
                     })
                 }
+                */
+                
+                    currentEvents.map(event => {
+                        return (
+                            
+                            <div className='col block-event shadow bg-body rounded'>
+                            <span className='row'>
+                                <h4>{event.label}</h4>
+                            </span>
+                            <span className='row'>
+                                <h5>`[${event.cityName}]`</h5>
+                            </span>
+                            <span className='row'>
+                                <span className='col'>
+                                    <img className='icon' src={userIco} alt='user icon'/>
+                                    {event.nbParticipants}
+                                </span>
+                                <span className='col'>
+                                    <Link to={'/eventDetails'}>voir</Link>
+                                </span>
+                            </span>
+                        </div>
+                          
+                        );
+                    })
+                    
+                }
+                </div>
+                        </div>
                 <Pagination eventsPerPage={this.state.eventsPerPage} totalEvents={this.state.eventsToShow.length} paginate={paginate}/>
             </div>
         );
