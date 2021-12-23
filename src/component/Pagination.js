@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 const Pagination  = ({eventsPerPage, totalEvents, paginate}) => {
 
@@ -7,21 +8,25 @@ const Pagination  = ({eventsPerPage, totalEvents, paginate}) => {
     for (let numPage = 1; numPage < Math.ceil(totalEvents / eventsPerPage); numPage++){
         pageNumbers.push(numPage);
     }
-
+   
     return (
-        <nav>
-            <ul className='pagination'>
+        <div className='paginate'>
+            <nav aria-label="Page navigation example">
+            <ul className='pagination pagination-sm'>
                 {
                     pageNumbers.map(numPage => {
                         return (
                             <li key={numPage} className='page-item'>
-                                <a onClick={() => paginate(numPage)} className='page-link'>{numPage}</a>
+                                <Link to='#' onClick={() => paginate(numPage)} className='page-link'>
+                                    {numPage}
+                                </Link>
                             </li>
                         );
                     })
                 }
             </ul>
         </nav>
+        </div>
     );
 }
 

@@ -11,6 +11,12 @@ ul a, span a{
   text-decoration: none;
   color: black;
 }
+.linkSeeMore{
+  color: goldenrod;
+}
+.linkSeeMore:hover {
+  text-decoration: underline;
+}
 a:hover{
   color: black;
   text-decoration: none;
@@ -18,10 +24,11 @@ a:hover{
 }
 .footer {
   background-color: lightgray;
-  height: 50px;
+  padding-top: 20px;
+  height: 70px;
   width: 100%;
   position: initial;
- 
+  bottom: 0;
 }
 
 .footer .container .footer-item a li {
@@ -83,6 +90,11 @@ a:hover{
   left: 100px;
 }
 
+.menuUser{
+  position: relative;
+  left: 100px;
+}
+
 .body-home {
   background-image: url('./resources/images/wemeet.png');
   height: 400px;
@@ -104,8 +116,6 @@ a:hover{
     position: relative;
     left: 300px;
   }
-
-  
 }
 
 
@@ -201,3 +211,46 @@ ul .nav-item:hover {
   margin-top: 20px;
 }
 
+.block-event div {
+  margin-right: 10px;
+  margin-top: 20px;
+}
+
+.loading {
+  padding-top: 30px;
+  padding-bottom: 30px;
+}
+
+/* pagination youtube*/
+
+.paginate {
+  padding-top: 20px;
+  width: 20%;
+  height: 20px;
+  padding-left: 80px;
+  justify-content: flex-end;
+}
+
+.paginate a {
+  padding: 4px;
+  margin: 4px;
+  border-radius: 5px;
+  border: 1px solid #a8840b;
+  color: #dddabe;
+  cursor: pointer;
+}
+
+.paginate a:hover {
+  color: white;
+  background-color: #ad921a;
+}
+
+.paginationActive a {
+  color: rgb(22, 22, 15);
+  background-color: #ad9927;
+}
+
+.paginationDisabled a {
+  color: rgb(87, 85, 85);
+  background-color: rgb(150, 150, 144);
+}

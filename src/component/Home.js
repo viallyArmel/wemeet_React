@@ -23,6 +23,9 @@ export default class Home extends Component {
     }
 
     render() {
+
+        console.log("Je suuis dans le render")
+
         return (
             <div>
                 <Navbar />
@@ -54,7 +57,7 @@ export default class Home extends Component {
                         </div>
                         <div>
                             <div className='row'>
-                                <h5 className='col col-sm-3'><label><strong>Trier par ville</strong></label></h5>
+                                <h5 className='col col-sm-3'><label><strong>Trier par ville :</strong></label></h5>
                                 <div className='col col-sm-4'>
                                     <input type='text' placeholder='ex: namur' className='form-control shadow bg-body rounded' onChange={
                                         (event) => this.changeSearchValue(event)
@@ -64,6 +67,7 @@ export default class Home extends Component {
                             </div>
                         </div>
                     </div>
+                    <div className='vide'></div>
                 <Footer />
             </div>
         );

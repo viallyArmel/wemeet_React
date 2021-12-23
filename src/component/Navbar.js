@@ -39,7 +39,7 @@ export default class Navbar extends Component {
                             <span className="navbar-toggler-icon"></span>
                         </button>
                     </div>
-                    <div className="offcanvas offcanvas-end" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
+                    <div className="offcanvas offcanvas-end" tabIndex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
                         <div className="offcanvas-header gold-color">
                             <h5 className="offcanvas-title" id="offcanvasNavbarLabel">Menu</h5>
                             <button type="button" className="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
@@ -57,10 +57,12 @@ export default class Navbar extends Component {
                                     </Link>
                                 </li>
                                 <li className="nav-item">
-                                    <Link className="nav-link active dropdown-toggle" to={'#'} id="offcanvasNavbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                        <div className='ico'><img className='icon' src={userIco} alt='user icon'/>Utilisateurs</div>
-                                    </Link>
-                                    <ul className='dropdown-menu' aria-labelledby="offcanvasNavbarDropdown">
+                                    <div className='ico  active dropdown-toggle' data-bs-toggle="dropdown">
+                                        <img className='icon' src={userIco} alt='user icon'/>
+                                        Utilisateurs
+                                    </div>
+                            
+                                    <ul className='dropdown-menu menuUser' aria-labelledby="offcanvasNavbarDropdown">
                                         <li className='light-gold-color'><Link className="dropdown-item" to="#">Ajouter</Link></li>
                                         <li className='light-gold-color'><Link className="dropdown-item" to="#">Liste</Link></li>
                                     </ul>

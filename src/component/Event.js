@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import getAllEvents from '../API/APIWemeet';
-import userIco from '../resources/icon/user.png';
-import { Link } from 'react-router-dom';
+//import ReactPaginate from 'react-paginate';
 import Pagination from './Pagination';
+import EventBlock from './EventBlock';
 
 
 export default class Event extends Component {
@@ -20,93 +20,30 @@ export default class Event extends Component {
     }
 
     componentDidMount(){
+        this.setState({loading : true});
        
         getAllEvents().then(res => res.data).then(data => {
-        
             this.setState({
                 events : data,
                 eventsToShow : data
             });
         });
-    }
 
-    
+        this.setState({loading : false});
+    }
 
     
     render() {
         const indexOfLastEvent = this.state.currentPage * this.state.eventsPerPage;
-        const indexOfFirstEvent = this.state.indexOfLastEvent - this.state.eventsPerPage;
-        const currentEvents = this.state.eventsToShow.splice(indexOfFirstEvent, indexOfLastEvent);
+        const indexOfFirstEvent = indexOfLastEvent - this.state.eventsPerPage;
+        const currentEvents = this.state.eventsToShow.slice(indexOfFirstEvent, indexOfLastEvent);
 
-        console.log(currentEvents);
         const paginate = (numPage) => this.setState({currentPage : numPage});
 
-        
         return (
             <div className='container'>
-                <div class="container block-event">
-                            <div class="row row-cols-4 ">
-                {
-                    /*currentEvents.map(event => {
-                        return (
-                            <div className='container-fluid' key={event.id}>
-                                <div className='container block-event row row-cols-3 '>
-                                    <div className='col test'>
-                                        <div className='shadow bg-body rounded'>
-                                            <div className='col'>
-                                                <span className='row'>
-                                                    <h4>{event.label}</h4>
-                                                </span>
-                                                <span className='row'>
-                                                    <h5>`[${event.cityName}]`</h5>
-                                                </span>
-                                                <span className='row'>
-                                                    <span className='col'>
-                                                        <img className='icon' src={userIco} alt='user icon'/>
-                                                        {event.nbParticipants}
-                                                    </span>
-                                                    <span className='col'>
-                                                        <Link to={'/eventDetails'}>voir</Link>
-                                                    </span>
-                                                </span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        );
-                    })
-                }
-                */
-                
-                    currentEvents.map(event => {
-                        return (
-                            
-                            <div className='col block-event shadow bg-body rounded'>
-                            <span className='row'>
-                                <h4>{event.label}</h4>
-                            </span>
-                            <span className='row'>
-                                <h5>`[${event.cityName}]`</h5>
-                            </span>
-                            <span className='row'>
-                                <span className='col'>
-                                    <img className='icon' src={userIco} alt='user icon'/>
-                                    {event.nbParticipants}
-                                </span>
-                                <span className='col'>
-                                    <Link to={'/eventDetails'}>voir</Link>
-                                </span>
-                            </span>
-                        </div>
-                          
-                        );
-                    })
-                    
-                }
-                </div>
-                        </div>
-                <Pagination eventsPerPage={this.state.eventsPerPage} totalEvents={this.state.eventsToShow.length} paginate={paginate}/>
+                <EventBlock events={currentEvents} loading={this.state.loading} />
+                <Pagination eventsPerPage={this.state.eventsPerPage} totalEvents={this.state.events.length} paginate={paginate} />
             </div>
         );
     }
