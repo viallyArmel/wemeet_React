@@ -1,12 +1,12 @@
-import React, {Component} from "react";
+import React from "react";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import "../index.css";
 import { Link } from "react-router-dom";
 
 
 
-export default class componentName extends Component {
-  render() {
+const Footer = () => {
+  
     return (
         <div className="footer section text-center">
             <div className="container">
@@ -24,6 +24,7 @@ export default class componentName extends Component {
             </div>
         </div>
     );
-  }
 }
+
+export default Footer;
 

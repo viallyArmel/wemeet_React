@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
-import getAllEvents from '../API/APIWemeet';
-//import ReactPaginate from 'react-paginate';
+import {getAllEvents} from '../API/APIWemeet';
 import Pagination from './Pagination';
 import EventBlock from './EventBlock';
 
@@ -16,9 +15,10 @@ export default class Event extends Component {
             loading : false,
             currentPage : 1,
             eventsPerPage : 3,
+            searchCityName : this.props.searchCityName
         }
     }
-
+    
     componentDidMount(){
         this.setState({loading : true});
        
@@ -32,8 +32,27 @@ export default class Event extends Component {
         this.setState({loading : false});
     }
 
+    componentDidUpdate(prevProps){
+       
+        if (prevProps.searchCityName !== this.props.searchCityName){
+            this.setState(this.changeValueToShow(this.props.searchCityName));
+        }
+    }
+
+    changeValueToShow = (string) => {
+       
+        const eventsToShow = this.state.events;
+        const newEventToShow = eventsToShow.filter(event => {
+            return event.city_name.includes(string);
+        });
+        
+        this.setState({eventsToShow : newEventToShow});
+        
+    }
+
     
     render() {
+
         const indexOfLastEvent = this.state.currentPage * this.state.eventsPerPage;
         const indexOfFirstEvent = indexOfLastEvent - this.state.eventsPerPage;
         const currentEvents = this.state.eventsToShow.slice(indexOfFirstEvent, indexOfLastEvent);

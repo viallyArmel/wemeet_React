@@ -1,0 +1,54 @@
+async login(){
+    const dataLogin = {
+        email : this.state.email,
+        password : this.state.password
+    }
+
+    try {
+        const response = await login_API(dataLogin);
+        if (response){
+
+            localStorage.setItem("jwt", response.data);
+            this.getUserDataFromLocaleStorage();
+    
+            if (this.state.userStatus !== "admin")
+                this.setState({loginError : "Vous n'êtes pas administrateur !"});
+            else{
+                console.log("Good Job");
+                this.setState({redirectToHome : true});
+            }
+        }else
+            this.setState({loginError : "Impossible de se connecter!"});
+
+    }catch (e){
+        this.setState({loginError : "Email / Mot de passe incorrect !"});
+    }
+}
+
+getUserDataFromLocaleStorage = () => {
+    this.token = localStorage.getItem("jwt");
+    if (this.token != null){
+        const jwtPayloadBase64 = this.token.split(".")[1];
+        const payload = JSON.parse(Buffer.from(jwtPayloadBase64, 'base64'));
+        this.setState({userInfos: payload.value});
+        this.setState({userStatus: payload.status});
+    }
+}
+
+componentDidMount(prevProps){
+    this.getUserDataFromLocaleStorage()
+}
+
+
+ logout(){
+    localStorage.removeItem("jwt");
+    this.setState({userData: undefined});
+}
+
+-----------------------------------------------------------------------------------------
+On se focalise sur la sécurisation de nos pages. 
+- src / contexts / Auth.js
+
+- dans App.js on crée notre premier state
+- src/services/AuthApi.js
+- src/component/AuthenticatedRoute.jsx

@@ -1,5 +1,27 @@
-
-
+.iconMenu:hover{
+  cursor: pointer;
+}
+.iconMenu {
+  text-align: right;
+}
+.iconDelete{
+  width: 150%;
+}
+.liste:hover {
+  color: aliceblue;
+  background-color: #a8840b;
+}
+.iconMenu .btn-light {
+  height: 30px;
+  width: 40px;
+  
+}
+.errorMessage{
+  color: coral;
+  position: absolute;
+  align-content: center;
+  width: 50%;
+}
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
@@ -132,7 +154,7 @@ a:hover{
   padding-bottom: 16px;
 }
 
-h2, h1, h3, h4, h5 {
+h2, h1, h3, h4, h5, h6 {
   font-family: 'myFont';
 }
 

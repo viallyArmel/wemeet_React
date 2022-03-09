@@ -3,6 +3,9 @@ import Navbar from '../component/Navbar';
 import Footer from '../component/Footer';
 import Event from './Event';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import { getItem } from '../services/LocaleStorage';
+import { tokenName } from '../services/AuthApi';
+import jwtDecode from 'jwt-decode';
 
 
 export default class Home extends Component {
@@ -12,20 +15,33 @@ export default class Home extends Component {
 
         this.state = {
             searchCityName : "",
-            callback : props.callback
+            firstName : "",
+            lastName : ""
         }
     }
 
+    componentDidMount(){
+        const token = getItem(tokenName);
+        if (token !== null){
+            const {value} = jwtDecode(token);
+            this.setState({firstName : value.firstName, lastName : value.lastName});
+        }
+    }
+
+    messageAccueil(){
+        return (
+            <>
+                <h1>Salut {this.state.firstName} {this.state.lastName},</h1>
+                <h1>que veux-tu programmer ?</h1>
+            </>
+        )
+    }
+
     changeSearchValue (event) {
-        this.setState({ searchCityName : event.target.value}, () => {
-            this.state.callback(this.state.searchCityName);
-        });
+        this.setState({ searchCityName : event.target.value});
     }
 
     render() {
-
-        console.log("Je suuis dans le render")
-
         return (
             <div>
                 <Navbar />
@@ -33,8 +49,7 @@ export default class Home extends Component {
                         <div className='body-home'>
                             <div className='row mb-3'>
                                 <div className='container' id='titleHome'>
-                                    <h1>Salut Vially dag,</h1>
-                                    <h1>que veux-tu programmer ?</h1>
+                                    {this.messageAccueil()}
                                 </div>
                             </div>
                             <div className="row mb-3" id="mini-form">
@@ -60,10 +75,10 @@ export default class Home extends Component {
                                 <h5 className='col col-sm-3'><label><strong>Trier par ville :</strong></label></h5>
                                 <div className='col col-sm-4'>
                                     <input type='text' placeholder='ex: namur' className='form-control shadow bg-body rounded' onChange={
-                                        (event) => this.changeSearchValue(event)
+                                        ((event) => this.changeSearchValue(event))
                                     }/>
                                 </div>
-                                <Event/>
+                                <Event searchCityName={this.state.searchCityName} />
                             </div>
                         </div>
                     </div>
