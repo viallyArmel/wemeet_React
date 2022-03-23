@@ -24,6 +24,7 @@ export const login = async (userInfos) => {
         const { status } = jwtDecode(token);
         return status === "admin";
     } catch (e) {
+        console.error(e);
         return false;
     }
 }
