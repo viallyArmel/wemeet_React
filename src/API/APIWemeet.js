@@ -13,7 +13,7 @@ axiosRetry(axios, {
     retryDelay : axiosRetry.exponentialDelay
 });
 
-const PREFIX_URL = "http://localhost:3001/";
+const PREFIX_URL = "http://localhost:3002/";
 
 const getAllEvents = async () => {
     return await axios.get(`${PREFIX_URL}event/`);
