@@ -82,7 +82,7 @@ const Navbar = () => {
                                 </Link>
                             </li>
                             <li className="nav-item">
-                                <Link className="nav-link active" to={'/event'}>
+                                <Link className="nav-link active" to={`/addEvent/title`}>
                                     <div className='ico'><img className='icon' src={eventAvailableIco} alt='event icon'/>Créer un évènement</div>
                                 </Link>
                             </li>
@@ -114,7 +114,7 @@ const Navbar = () => {
                             <div className='div-footer'>
                                 <hr/>
                                 <li className="nav-item">
-                                    <Link className="nav-link active" to={'contactForm'}>
+                                    <Link className="nav-link active" to={'/contactForm'}>
                                         <div className='ico'><img className='icon' src={mailIco} alt='contact icon'/>Conctatez-nous</div>
                                     </Link>
                                 </li>

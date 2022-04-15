@@ -1,90 +1,81 @@
-import React, { Component } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import Navbar from '../component/Navbar';
 import Footer from '../component/Footer';
 import Event from './Event';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { getItem } from '../services/LocaleStorage';
-import { tokenName } from '../services/AuthApi';
-import jwtDecode from 'jwt-decode';
+import { currentUser } from '../API/APIWemeet';
+import { Link } from 'react-router-dom';
+import Auth from '../contexts/Auth';
 
 
-export default class Home extends Component {
+export const Home = () => {
 
-    constructor (props){
-        super(props);
+    const [searchCityName, setSearchCityName] = useState("");
+    const [firstName, setFirstName] = useState("");
+    const [lastName, setLastName] = useState("");
+    const [titleEvent, setTitleEvent] = useState("");
+    const { isAuthenticated } = useContext(Auth);
 
-        this.state = {
-            searchCityName : "",
-            firstName : "",
-            lastName : ""
+    useEffect(() => {
+
+        if (!isAuthenticated) {
+            window.location.replace('/login');
         }
-    }
-
-    componentDidMount(){
-        const token = getItem(tokenName);
-        if (token !== null){
-            const {value} = jwtDecode(token);
-            this.setState({firstName : value.firstName, lastName : value.lastName});
+        const user = currentUser().value;
+        if (user !== null) {
+            setFirstName(user.firstName);
+            setLastName(user.lastName);
         }
-    }
+    }, [isAuthenticated]);
 
-    messageAccueil(){
-        return (
-            <>
-                <h1>Salut {this.state.firstName} {this.state.lastName},</h1>
-                <h1>que veux-tu programmer ?</h1>
-            </>
-        )
-    }
+    titleEvent === "" && setTitleEvent("title");
 
-    changeSearchValue (event) {
-        this.setState({ searchCityName : event.target.value});
-    }
-
-    render() {
-        return (
-            <div>
-                <Navbar />
-                    <div className='container-fluid'>
-                        <div className='body-home'>
-                            <div className='row mb-3'>
-                                <div className='container' id='titleHome'>
-                                    {this.messageAccueil()}
-                                </div>
-                            </div>
-                            <div className="row mb-3" id="mini-form">
-                                <div className="col col-sm-10">
-                                    <input type="text" className="form-control form-control-sm" id="colFormLabelSm" placeholder="Titre de l'évènement"/>
-                                </div>
-                                <div className="col">
-                                    <button className='my-btn radius'>Créer</button>
-                                </div> 
-                            </div>
-                        </div>
-                        <div className='container'>
-                            <div className='container-fluid'>
-                                <nav className='row'>
-                                    <div className='col col-sm-6 item-event text-center'>
-                                        <span><h3>Tous les évènements</h3></span>
-                                    </div>
-                                </nav>
-                            </div>
-                        </div>
-                        <div>
-                            <div className='row'>
-                                <h5 className='col col-sm-3'><label><strong>Trier par ville :</strong></label></h5>
-                                <div className='col col-sm-4'>
-                                    <input type='text' placeholder='ex: namur' className='form-control shadow bg-body rounded' onChange={
-                                        ((event) => this.changeSearchValue(event))
-                                    }/>
-                                </div>
-                                <Event searchCityName={this.state.searchCityName} />
-                            </div>
+    return (
+        <div>
+            <Navbar />
+            <div className='container-fluid'>
+                <div className='body-home'>
+                    <div className='row mb-3'>
+                        <div className='container' id='titleHome'>
+                            <h1>Salut {firstName} {lastName},</h1>
+                            <h1>que veux-tu programmer ?</h1>
                         </div>
                     </div>
-                    <div className='vide'></div>
-                <Footer />
+                    <div className="row mb-3" id="mini-form">
+                        <div className="col col-sm-10">
+                            <input type="text" onChange={(e) => setTitleEvent(e.target.value)} className="form-control form-control-sm" id="colFormLabelSm" placeholder="Titre de l'évènement" />
+                        </div>
+                        <div className="col">
+                            <Link to={`/addEvent/${titleEvent}`}><button className='my-btn radius'>Créer</button></Link>
+                        </div>
+                    </div>
+                </div>
+                <div className='container'>
+                    <div className='container-fluid'>
+                        <nav className='row'>
+                            <div className='col col-sm-6 item-event text-center'>
+                                <span><h3>Tous les évènements</h3></span>
+                            </div>
+                        </nav>
+                    </div>
+                </div>
+                <div>
+                    <div className='row'>
+                        <h5 className='col col-sm-3'><label><strong>Trier par ville :</strong></label></h5>
+                        <div className='col col-sm-4'>
+                            <input type='text' placeholder='ex: namur' className='form-control shadow bg-body rounded' onChange={
+                                ((event) => setSearchCityName(event.target.value))
+                            } />
+                        </div>
+                        <Event searchCityName={searchCityName.toLowerCase()} />
+                    </div>
+                </div>
             </div>
-        );
-    }
+            <div className='vide'></div>
+            <Footer />
+        </div>
+    );
+
 }
+
+export default Home;

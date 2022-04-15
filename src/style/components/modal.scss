@@ -1,0 +1,137 @@
+.ReactModal__Overlay {
+    opacity: 0;
+    transition: opacity 300ms ease-in-out;
+}
+
+.ReactModal__Overlay--after-open {
+    opacity: 1;
+}
+
+.ReactModal__Overlay--before-close {
+    opacity: 0;
+}
+
+.cross {
+    position: absolute;
+    top: 0.2rem;
+    right: 0.5rem;
+    font-size: 2rem;
+    font-weight: bold;
+    text-decoration: none;
+    transition: 0.5s ease;
+    color: #333;
+    cursor: pointer;
+}
+.cross:hover {
+    font-size: 1.7rem;
+}
+.success, .faillure {
+    padding: 10px;
+    width: 80%;
+    border-radius: 4px;
+}
+
+.success {
+    background: rgba(8, 100, 8, 0.281);
+}
+
+.faillure {
+    background: rgba(241, 137, 137, 0.342);
+}
+
+.myModal {
+    transition: 0.5s ease-in;
+    box-shadow: 0 0 3px #333;
+    background: rgba(245, 245, 245, 0.945);
+   
+
+
+    h2, .zoneBtn {
+        background: #ece5bc59;
+        border-radius: 10px;
+        width: 90%;
+        padding: 6px;
+    }
+
+    input, textArea {
+        border: 1px solid;
+        border-radius: 3px;
+    }
+
+    .content {
+        position: relative;
+        input[type="text"] {
+            outline: none;
+            border-radius: 20px;
+            box-shadow: 0 0 1px #333;
+            padding: 6px;
+        }
+        textArea {
+            width: 90%;
+            outline: none;
+            resize: none;
+        }
+
+        input[type="date"] {
+            width: 30%;
+        }
+        input[type="number"] {
+            width: 7%;
+        }
+
+        span {
+            margin-right: 23px;
+        }
+
+    }
+
+    .scrollbar {
+        .titleListe {
+            text-align: center;
+            color: #ad9927;
+            text-shadow: 1px 1px 1px #333;
+        }
+
+        #listeParticipants {
+            display: inline-block;
+            letter-spacing: 1px;
+            text-align: left;
+            font-size: 1.1rem;
+        }
+    }
+    .zoneBtn {
+        margin-top: 12px;
+        background: #ece5bc59;
+
+        input[type="submit"] {
+            outline: none;
+            margin-right: 23px;
+            border-radius: 4px;
+            
+            
+        }
+        #Ajouter, #Modifier, #Supprimer {
+            transition: .4s ease-in;
+        }
+        #Ajouter{
+            background-color: #44df7fbb;
+        }
+        #Modifier {
+            background-color: #eed549bb;
+        }
+        
+        #Supprimer {
+            background: rgba(255, 36, 36, 0.651);
+        }
+        #Ajouter:hover{
+            box-shadow: inset 0 0 0 30px rgb(6, 117, 21), 1px 1px 3px rgb(29, 28, 28);
+            color: blanchedalmond;
+        }
+        #Modifier:hover {
+            box-shadow: inset 0 0 0 30px rgb(248, 151, 4), 1px 1px 3px rgb(29, 28, 28);
+        }
+        #Supprimer:hover {
+            box-shadow: inset 0 0 0 30px rgb(250, 16, 16), 1px 1px 3px rgb(37, 36, 36);
+        }
+    }
+}

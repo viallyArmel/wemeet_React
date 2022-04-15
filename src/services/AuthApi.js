@@ -16,6 +16,7 @@ export function hasAuthenticated(){
     return isValid;
 }
 
+
 export const login = async (userInfos) => {
     try {
         const response = await axios.post(`${PREFIX_URL}user/login`, userInfos);

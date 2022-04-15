@@ -1,0 +1,223 @@
+
+.eventDetail {
+    
+    position: relative;
+    .editIcon {
+        padding-left: 10px;
+        img{
+            width: 19px;
+        }
+    }
+
+    img{
+        cursor: pointer;
+        transition: 0.4s ease-out;
+    }
+    img:hover {
+        transform: scale(0.80);
+    }
+    img:active{
+        transform: translateX(4px);
+    }
+    
+    #entete {
+        background: #ffe6afea;
+        width: 100%;
+        margin-top: -10px;
+        padding: 12px;
+    
+        #label {
+            font-size: 2rem;
+        }
+    
+        #userIco {
+            padding-left: 13px;
+            height: 1.2rem;
+            cursor: pointer;
+            transition: .4s ease-out;
+        }
+        h4 {
+            padding-top: 13px;
+        }
+        
+    }
+    #description{
+        padding: 20px;
+        background: rgba(214, 213, 213, 0.274) ;
+        width: 70%;
+        margin: 0 auto;
+        
+    }
+    .map::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        height: 100%;
+        width: 100%;
+        background: url('../../resources/images/map.jpg') no-repeat 50%/cover;
+        z-index: -100;
+        filter: blur(1.5px) opacity(90%);
+    }
+    .map {
+        position: relative;
+        
+        width: 70%;
+        margin: 0 auto;
+        padding: 50px;
+        border-radius: 5px;
+        box-shadow: 0 0 5px rgba(0, 0, 0, 0.308);
+        transition: .4s ease-in-out;
+
+        span:first-child img {
+            width: 1.6rem;
+        }
+    }
+    #ville {
+        font-size : 1.9rem;
+        font-style: bold;
+    }
+    
+    .trait {
+        background: #b4892bea;
+        margin : 3rem auto;
+        width: 70%;
+        height: 0.1rem;
+        border-radius: 9px;
+    }
+
+    #disponibilité, .sondage, #addSurvey{
+        width: 70%;
+        margin: 0 auto;
+        h3 {
+            background:#b4892bea ;
+            border-radius: 4px;
+        }
+
+        input:invalid + span::after {
+        content: '✖';
+        }
+        
+        input:valid+span::after {
+        content: '✓';
+        }
+
+        .item:nth-child(even) {
+            background: #ecd4a193;
+        }
+        .item:nth-child(odd) {
+            background: whitesmoke;
+        }
+
+        input[type='date'] {
+            background: #f3d69715;
+            outline: none;
+            color: rgb(46, 44, 44);
+            width: 40%;
+            border-radius: 4px;
+            border: 1px solid;
+            padding: 2px;
+            text-align: center;
+            font-family: inherit;
+            transition: .4s ease-in-out;
+        }
+        input[type='date']:hover{
+            background: rgba(80, 74, 74, 0.575);
+            color: whitesmoke;
+        }
+
+        .item:not(:last-child){
+            cursor: pointer;
+            transition: 0.5s ease-in-out;
+        }
+        .item:not(:last-child):hover{
+            transform: scale(0.97);
+        }
+        .item:not(:last-child):active{
+            transform: translate(2px);
+        }
+
+        .item {
+            border-radius: 4px;
+            padding: 3px;
+            margin: 2px;
+            text-align: left;
+            position: relative;
+
+            .imgBlock {
+                position: absolute;
+                right: 1rem;
+            }
+        }
+       
+    }
+    #addSurvey{
+        width: 30%;
+        transition: .4s ease-in-out;
+        cursor: pointer;
+        img {
+            padding: 3px;
+            padding-left: 20px;
+            
+        }
+    }
+    #addSurvey:hover{
+        transform: scale(0.97);
+        box-shadow: 0 0 5px rgba(0, 0, 0, 0.308);
+    }
+    #addSurvey:active{
+        transform: translate(2px);
+    }
+    h3 {
+        margin-bottom: 4rem;
+    }
+
+    .sondage, #disponibilité {
+        border: 1px solid;
+        padding: 30px;
+        border-radius: 5px;
+        box-shadow: 0 0 5px rgba(0, 0, 0, 0.308);
+        transition: .4s ease-out;
+    }
+
+    .sondage:hover, #disponibilité:hover, .map:hover{
+        box-shadow: 3px 3px 8px rgba(0, 0, 0, 0.308);
+    }
+
+    .sondage {
+       
+        margin-bottom: 30px;
+        padding-bottom: 100px;
+        table {
+        
+            tr:nth-child(even) {
+                background: #85848393;
+            }
+            tr:nth-child(odd) {
+                background: whitesmoke;
+            }
+            tr:hover {
+                background: #eeddb8a1;
+                transform: scale(0.97);
+                box-shadow: inset 0 0 0 30px rgb(221, 212, 212), 1px 1px 3px #333;
+            }
+            tr {
+                padding: 12px;
+                border-bottom: 3px solid;
+                border-radius: 5px;
+                border-bottom-color: #d8aa46a1;
+                border-bottom-left-radius: 8px;
+                border-bottom-right-radius: 8px;
+                cursor: pointer;
+                transition: 0.5s ease-in-out;
+    
+                td {
+                    width: 70%;
+                    font-family: inherit;
+                    padding: 10px;
+                }
+            }
+        }
+    }
+   
+}  

@@ -5,7 +5,7 @@ const Pagination  = ({eventsPerPage, totalEvents, paginate}) => {
 
     const pageNumbers = [];
 
-    for (let numPage = 1; numPage < Math.ceil(totalEvents / eventsPerPage); numPage++){
+    for (let numPage = 1; numPage <= Math.ceil(totalEvents / eventsPerPage); numPage++){
         pageNumbers.push(numPage);
     }
    

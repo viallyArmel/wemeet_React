@@ -14,7 +14,7 @@ export default class Event extends Component {
             eventsToShow : [],
             loading : false,
             currentPage : 1,
-            eventsPerPage : 3,
+            eventsPerPage : 6,
             searchCityName : this.props.searchCityName
         }
     }
@@ -40,7 +40,7 @@ export default class Event extends Component {
     }
 
     changeValueToShow = (string) => {
-       
+     
         const eventsToShow = this.state.events;
         const newEventToShow = eventsToShow.filter(event => {
             return event.city_name.includes(string);
