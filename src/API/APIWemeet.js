@@ -106,9 +106,7 @@ const deleteSurveyLine = async ({lineNumber, survey, role}) => {
     });
 }
 
-
 //survey
-
 const getSurveys = async (eventId) => {
     return await axios.get(`${PREFIX_URL}survey/${eventId}`);
 }
@@ -150,11 +148,7 @@ const createSurvey = async ({label, description, event, role}) => {
     })
 }
 
-
-
-
 //user
-
 export const currentUser = () => {
     return hasAuthenticated() ? jwtDecode(token) : null;
 }
@@ -221,7 +215,6 @@ const createEvent = async ({ email, label, cityName, isPrivate, description }) =
         }
     });
 }
-
 
 
 export {

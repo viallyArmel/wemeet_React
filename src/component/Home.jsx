@@ -1,12 +1,11 @@
 import React, { useContext, useEffect, useState } from 'react';
-import Navbar from '../component/Navbar';
-import Footer from '../component/Footer';
+import Navbar from './Navbar';
+import Footer from './Footer';
 import Event from './Event';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { currentUser } from '../API/APIWemeet';
 import { Link } from 'react-router-dom';
 import Auth from '../contexts/Auth';
-
 
 export const Home = () => {
 
@@ -14,19 +13,18 @@ export const Home = () => {
     const [firstName, setFirstName] = useState("");
     const [lastName, setLastName] = useState("");
     const [titleEvent, setTitleEvent] = useState("");
-    const { isAuthenticated } = useContext(Auth);
+    const { setIsAuthenticated } = useContext(Auth);
 
     useEffect(() => {
 
-        if (!isAuthenticated) {
-            window.location.replace('/login');
-        }
-        const user = currentUser().value;
-        if (user !== null) {
+        const user = currentUser()?.value;
+        
+        if (user) {
             setFirstName(user.firstName);
             setLastName(user.lastName);
-        }
-    }, [isAuthenticated]);
+        } else
+            setIsAuthenticated(false);
+    }, [setIsAuthenticated]);
 
     titleEvent === "" && setTitleEvent("title");
 

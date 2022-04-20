@@ -1,14 +1,12 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useState } from "react";
 import Navbar from "./Navbar";
 import '../style/components/eventForm.scss';
 import { createEvent, currentUser } from "../API/APIWemeet";
-// import Toast from "./Toast";
-
 import Modal from 'react-modal';
 import '../style/components/modal.scss';
 import { StyleModal1 } from '../Utils/utils';
-import Auth from "../contexts/Auth";
 import { useParams } from "react-router-dom";
+import BreadCrumb from "./BreadCrumb";
 
 const EventForm = () => {
 
@@ -19,21 +17,14 @@ const EventForm = () => {
         isPrivate: false
     });
 
-    const {label} = useParams();
-    eventData.title === "" && setEventData({title : label});
-  
+    const { label } = useParams();
+    eventData.title === "" && setEventData({ title: label });
+
     const [isModalSuccessOpen, setModalSuccess] = useState(false);
     const [isModalErrorOpen, setModalError] = useState(false);
     const [errorMsg, setErrorMsg] = useState("");
     const [successMsg, setSuccessMsg] = useState("");
-    const {isAuthenticated} = useContext(Auth);
-
-    useEffect(() => {
-        if (!isAuthenticated){
-            window.location.replace('/login');
-        }
-    }, [isAuthenticated]);
-
+   
     const saveEvent = (e) => {
         e.preventDefault();
         eventData.isPrivate === "on" && (eventData.isPrivate = true);
@@ -51,8 +42,8 @@ const EventForm = () => {
             };
 
             createEvent(data).
-            then(res => showAlert(res.data.status, false)).
-            catch(e => showAlert(e.message, true));
+                then(res => showAlert(res.data.status, false)).
+                catch(e => showAlert(e.message, true));
         }
 
     }
@@ -62,7 +53,7 @@ const EventForm = () => {
     }
 
     const showAlert = (msg, isError) => {
-       
+
         if (isError) {
             setErrorMsg(msg);
             setModalError(true);
@@ -83,6 +74,8 @@ const EventForm = () => {
             <div className="formControl">
                 <div className="background">
                     <h1 id="libellé">Créer un évènement</h1>
+                    <BreadCrumb labels={["home", "Add event"]} endPoints={["/home"]} />
+
                     <form id="inscription" action="" onSubmit={saveEvent}>
 
                         <label htmlFor="title">Titre * :</label>

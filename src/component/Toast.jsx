@@ -4,7 +4,7 @@ import '../style/components/eventForm.scss';
 import checkIco from '../resources/icon/success.png';
 import errorIco from '../resources/icon/alert.png';
 
-//                              COMPOSANT NON UTILISé
+//                              COMPOSANT NON UTILISé | remplacé par les modals
 
 const Toast = ({title, message, isError }) => {
     const [icon] = useState({

@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { createCalendar, createSurvey, createSurveyLine, deleteCalendar, deleteSurvey, deleteSurveyLine, getCalendars, getEvent, getEventRoles, getSurveys, getUser, updateCalendar, updateEvent, updateSurvey, updateSurveyLine } from '../API/APIWemeet';
 import Navbar from './Navbar';
 import { useParams } from 'react-router-dom';
@@ -10,14 +10,13 @@ import checkIco from '../resources/icon/check-mark.png';
 import minusIco from '../resources/icon/minus.png';
 import crossIco from '../resources/icon/false.png';
 import editIco from '../resources/icon/edit.png';
-//import moreIco from '../resources/icon/more.png';
 import voteIco from '../resources/icon/vote.png';
-import Footer from '../component/Footer';
+import Footer from './Footer';
 import Modal from 'react-modal';
 import { StyleModal1 } from '../Utils/utils';
 import '../style/components/modal.scss';
 import { acceptableDate, dateToString } from '../Utils/utils';
-import Auth from '../contexts/Auth';
+import BreadCrumb from './BreadCrumb';
 
 Modal.setAppElement('#root');
 
@@ -64,15 +63,10 @@ export const EventDetails = () => {
   const [addSurveyModalOpen, setAddSurveyModal] = useState(false);
   const [isModalSuccessOpen, setModalSuccess] = useState(false);
   const [isModalErrorOpen, setModalError] = useState(false);
-  const { isAuthenticated } = useContext(Auth);
 
   const role = 'organizer';
 
   useEffect(() => {
-
-    if (!isAuthenticated) {
-      window.location.replace('/login');
-    }
 
     //event
     getEvent(id).then(res => {
@@ -116,7 +110,7 @@ export const EventDetails = () => {
       }).catch((e) => showAlert(e.message, true));
     }).catch(e => showAlert(e.message, true));
 
-  }, [id, isAuthenticated]);
+  }, [id]);
 
   const handleChange = ({ target }) => {
     const { name, value } = target;
@@ -234,6 +228,8 @@ export const EventDetails = () => {
           <h4>Organisé par {first_name} {last_name} <span onClick={() => setModalParticipant(true)}><img id="userIco" title='Afficher les pariticipants' alt="user icon" src={UserIco} /> {participants.length} </span> </h4>
         </div>
 
+        <BreadCrumb labels={["home", "Event details"]} endPoints={["/home"]} />
+
         <div id='description'>
           <h3>Description <span className='editIcon'><img onClick={() => setModalDescriptionEvent(true)} src={editIco} alt='edit' title='Modifier' /></span></h3>
           {description}
@@ -329,6 +325,7 @@ export const EventDetails = () => {
 
         </div>
       </div>
+
       {/* LES MODAUX */}
 
       {/* Modal : tout s'est bien passé */}

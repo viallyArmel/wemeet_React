@@ -7,6 +7,7 @@ import EventDetails from "../component/EventDetails";
 import { hasAuthenticated } from "../services/AuthApi";
 import Auth from "../contexts/Auth";
 import EventForm from "../component/EventForm";
+import AuthenticatedRoute from "../component/AuthenticatedRoute";
 
 export default function RouteWemeet(){
     const [isAuthenticated, setIsAuthenticated] = useState(hasAuthenticated());
@@ -16,12 +17,14 @@ export default function RouteWemeet(){
         <Auth.Provider value={{isAuthenticated, setIsAuthenticated}}>
             <Router>
                 <Routes>
-                    <Route exact path='/home' element={<Home/>}/>
-                    <Route exact path='/addEvent/:label' element={<EventForm/>}/>
+                    {/* <AuthenticatedRoute path='/home' element={<Home/>} isAuthenticated = {isAuthenticated} /> */}
+                    <Route exact path='/home' element={<AuthenticatedRoute><Home/></AuthenticatedRoute>} />
+                    {/* <Route exact path='/home' element={<Home/>}/> */}
+                    <Route exact path='/addEvent/:label' element={<AuthenticatedRoute><EventForm /></AuthenticatedRoute>}/>
                     <Route exact path='/login' element={<ConnexionPage />}/>
                     <Route exact path='/allEvent' element={<Event/>}/>
-                    <Route exact path='/eventDetails/:id'  element={<EventDetails />}/>
-                    <Route path="/" element={<Navigate to="/home"/>} />
+                    <Route exact path='/eventDetails/:id'  element={<AuthenticatedRoute><EventDetails /></AuthenticatedRoute>}/>
+                    <Route path="*" element={<Navigate to="/home"/>} />
                 </Routes>
             </Router>
         </Auth.Provider>

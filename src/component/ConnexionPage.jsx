@@ -33,8 +33,8 @@ const ConnexionPage = () => {
                 setIsAuthenticated(false);
             }
         
-        }catch({err}){
-            console.log(err);
+        }catch(err){
+            setMsgError(err.message);
         }
     }
 
@@ -67,7 +67,7 @@ const ConnexionPage = () => {
                                 />
                             </div>
                             <div className='row input'>
-                                <input type='password'placeholder='Mot de passe' className='form-control'
+                                <input type='password' placeholder='Mot de passe' className='form-control'
                                     id="password" name='password' required 
                                     onChange={handleChange}
                                 />
