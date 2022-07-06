@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import Navbar from "./Navbar";
 import '../style/components/userForm.scss';
 import {createUser} from "../API/APIWemeet";
+import { regexName, regexEmail, regexPassword } from "../Utils/utils";
 import Modal from 'react-modal';
 import '../style/components/modal.scss';
 import { StyleModal1 } from '../Utils/utils';
@@ -61,11 +62,20 @@ const UserForm = () => {
     const handleSubmit = e => {
         e.preventDefault();
 
-        if(userData.password !== userData.checkPassword) {
-            showAlert("Les mots de passe doivent être identiques !", true);
+        if (!regexName(userData.firstName)) {
+            showAlert( "Merci de ne pas placer de chiffres dans votre prénom !", true);
+        } else if (!regexName(userData.lastName)) {
+            showAlert("Merci de ne pas placer de chiffres dans votre nom ! \n", true);
+        } else if (!regexEmail(userData.email)) {
+            showAlert("Le format de l'adresse mail doit corrspondre à \"mon@exemple.com\".\n",true);
+        } else if (!regexPassword(userData.password)) {
+            showAlert("Le mot de passe doit comprendre entre 6 et 25 caractère avec au moins une majuscule et une minuscule.", true);
+        } else if(userData.password !== userData.checkPassword) {
+            showAlert("Les mots de passe doivent être identiques ! \n",true);
         } else {
             saveUser();
         }
+            // showAlert(alertMsg, true);
     }
 
     const handleChange = ({ target }) => {
@@ -89,7 +99,7 @@ const UserForm = () => {
                             <input id="lastName" type="text" name="lastName" placeholder="votre nom" onChange={handleChange} required />
 
                             <label htmlFor="email">Email * :</label>
-                            <input id="email" type="email" name="email" placeholder="votre e-mail" onChange={handleChange} required />
+                            <input id="email" type="text" name="email" placeholder="votre e-mail" onChange={handleChange} required />
 
                             <label htmlFor="password">Mot de passe * :</label>
                             <input id="password" type="password" name="password" placeholder="votre mot de passe" onChange={handleChange} required />

@@ -49,3 +49,21 @@ export const StyleModal1 = {
         position: 'fixed',
     }
 };
+
+export const regexName = (name) => {
+    const nameRegexp = new RegExp(/[A-ZÇÁÀÂÄÉÈÊËÍÌÎÏÓÒÔÖÚÙÛÜÝŸỲŶ][a-zçáàäâéèêëíìîïóòôöúùûüŷỳýÿ]*['\s-]?[A-ZÇÁÀÂÄÉÈÊËÍÌÎÏÓÒÔÖÚÙÛÜÝŸỲŶ][a-zçáàäâéèêëíìîïóòôöúùûüŷỳýÿ]*/, 'i');
+    return nameRegexp.test(name);
+    // "Name must not contain digits nor special characters."
+}
+
+export const regexEmail = (email) => {
+    const emailRegExp = new RegExp(/[\w.]+@\w+\.\w+/, 'i');
+    return emailRegExp.test(email);
+    // "Email must respect the following pattern : abc@example.foo"
+}
+
+export const regexPassword = (password) => {
+    const passwordRegexp = new RegExp(/((?=.*\d)(?=.*[a-z])(?=.*[A-Z])([-+_!@#$€%^&*.,?]*)){6,25}/, 'i');
+    return passwordRegexp.test(password);
+    // "Password must contain between 6 and 25 characters, including at least one digit, one letter in upper and in lower case. Special characters are recommended."
+}

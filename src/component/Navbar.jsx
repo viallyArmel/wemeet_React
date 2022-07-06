@@ -84,29 +84,29 @@ const Navbar = () => {
                                     <div className='ico'><img className='icon' src={eventAvailableIco} alt='event icon'/>Créer un évènement</div>
                                 </Link>
                             </li>
-                            <li className="nav-item">
-                                <div className='ico  active dropdown-toggle' data-bs-toggle="dropdown">
-                                    <img className='icon' src={userIco} alt='user icon'/>
-                                    Utilisateurs
-                                </div>
-                        
-                                <ul className='dropdown-menu menuUser' aria-labelledby="offcanvasNavbarDropdown">
-                                    <li className='light-gold-color menuUserItem'>
-                                        <Link className="dropdown-item" to="/sign">
-                                        <img className='icon' src={addUserIco} alt='add user icon'/>
-                                            Ajouter
-                                        </Link>
-                                    </li>
-                                    <li className='light-gold-color menuUserItem'>
-                                        {isAdmin ?
+                            { isAdmin &&
+                                <li className="nav-item">
+                                    <div className='ico  active dropdown-toggle' data-bs-toggle="dropdown">
+                                        <img className='icon' src={userIco} alt='user icon'/>
+                                        Utilisateurs
+                                    </div>
+
+                                    <ul className='dropdown-menu menuUser' aria-labelledby="offcanvasNavbarDropdown">
+                                        <li className='light-gold-color menuUserItem'>
+                                            <Link className="dropdown-item" to="/sign">
+                                                <img className='icon' src={addUserIco} alt='add user icon'/>
+                                                Ajouter
+                                            </Link>
+                                        </li>
+                                        <li className='light-gold-color menuUserItem'>
                                             <Link className="dropdown-item" to={"/users"}>
                                                 <img className='icon' src={listUserIco} alt='list user icon'/>
                                                 Liste
-                                            </Link> : <></>
-                                        }
-                                    </li>
-                                </ul>
-                            </li>
+                                            </Link>
+                                        </li>
+                                    </ul>
+                                </li>
+                            }
                             <hr/>
                             <li className="nav-item">
                                 <Link onClick={handleLogout} className="nav-link" to={'/login'}>
