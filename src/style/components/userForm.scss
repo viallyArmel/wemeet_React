@@ -1,0 +1,60 @@
+#inscription {
+    #userForm {
+      position: absolute;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      grid-template-rows: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+      grid-template-areas:
+        'la1 i1'
+        'la2 i2'
+        'la3 i3'
+        'la4 i4'
+        'la5 i5'
+        'la6 i6'
+        'la7 i7'
+        'bt bt';
+      border: 1px solid;
+      margin: 12px;
+      padding: 2rem;
+      border-radius: 6px;
+      box-shadow: 0 0 3px #333;
+      width: 50%;
+      height: 600px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: rgba(228, 228, 228, 0.349);
+      transition: 0.4s ease-in;
+  }
+
+  #firstName {
+    grid-area : i1;
+  }
+
+  #lastName {
+    grid-area : i2;
+  }
+
+  #email {
+    grid-area : i3;
+  }
+
+  #password {
+    grid-area : i4;
+  }
+
+  #checkPassword {
+    grid-area : i5;
+  }
+
+  #address {
+    grid-area : i6;
+  }
+
+  #postalCode {
+    grid-area : i7;
+  }
+
+  #submit {
+    grid-area : bt;
+  }
+}

@@ -163,6 +163,16 @@ const getUser = async (id) => {
     });
 }
 
+const getAllUsers = async () => {
+    return await axios({
+        method: "get",
+        url: `${PREFIX_URL}user/all`,
+        headers : {
+            Authorization : "Bearer " + token
+        }
+    });
+}
+
 //event
 const getEvent = async (id) => {
     return await axios.get(`${PREFIX_URL}event/${id}`);
@@ -196,7 +206,7 @@ const updateEvent = async (id, label, cityName, description, isPrivate) => {
         headers : {
             Authorization : "Bearer " + token
         }
-    })
+    });
 }
 const createEvent = async ({ email, label, cityName, isPrivate, description }) => {
     
@@ -216,10 +226,28 @@ const createEvent = async ({ email, label, cityName, isPrivate, description }) =
     });
 }
 
+const createUser = async ({firstName, lastName, email, password, address, postalCode}) => {
+    return await axios({
+       method: "post",
+       url: `${PREFIX_URL}user/`,
+       data: {
+           firstName,
+           lastName,
+           email,
+           password,
+           address,
+           postalCode
+       },
+        headers : {
+           Authorization : "Bearer " + token
+        }
+    });
+}
+
 
 export {
     getAllEvents, PREFIX_URL, deleteEvent, createEvent, getEventRoles,
-    getUser, getEvent, getSurveys, createSurvey, getCalendars,
+    getUser, getAllUsers, createUser, getEvent, getSurveys, createSurvey, getCalendars,
     updateEvent, deleteCalendar, updateCalendar, createCalendar, 
     updateSurvey, deleteSurvey,
     createSurveyLine, deleteSurveyLine, updateSurveyLine,

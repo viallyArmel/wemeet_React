@@ -1,0 +1,24 @@
+#userGrid {
+  border: 1px solid;
+  border-radius: 6px;
+  box-shadow: 0 0 3px #333;
+  margin: 4em;
+
+  .grid {
+    display:grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
+    grid-template-rows: auto;
+
+    border: 1px solid goldenrod;
+    margin: 2rem;
+    padding: 2rem;
+    border-radius: 6px;
+    box-shadow: 0 0 3px #333;
+
+  }
+
+  .titles {
+    font-size: large;
+    font-weight: bolder;
+  }
+}

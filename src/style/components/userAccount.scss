@@ -1,0 +1,53 @@
+#wrapper {
+  #userInfos {
+    display:grid;
+    grid-template-columns: auto auto;
+    grid-template-rows: auto auto auto auto;
+    grid-template-areas:
+      'fn1 fn2'
+      'ln1 ln2'
+      'em1 em2'
+      'ad1 ad2';
+    grid-gap: 2rem;
+    border: 1px solid;
+    margin: 5rem;
+    padding: 2rem;
+    border-radius: 6px;
+    box-shadow: 0 0 3px #333;
+  }
+
+  #labFN {
+    grid-area: fn1;
+  }
+  #contentFN {
+    grid-area: fn2;
+  }
+  #labLN {
+    grid-area: ln1;
+  }
+  #contentLN {
+    grid-area: ln2;
+  }
+  #labEM {
+    grid-area: em1;
+  }
+  #contentEM {
+    grid-area: em2;
+  }
+  #labAD {
+    grid-area: ad1;
+  }
+  #contentAD {
+    grid-area: ad2;
+  }
+}
+
+.content {
+  text-align: left;
+  margin-right: 30rem;
+}
+
+.label {
+  text-align: right;
+  margin-left: 30rem;
+}

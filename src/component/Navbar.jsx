@@ -10,7 +10,7 @@ import listUserIco from '../resources/icon/list.png';
 import eventAvailableIco from '../resources/icon/event-available.png';
 import { Link } from 'react-router-dom';
 import Auth from '../contexts/Auth';
-import { logout, tokenName } from '../services/AuthApi';
+import { logout, tokenName, hasAdminCredentials } from '../services/AuthApi';
 import jwtDecode from 'jwt-decode';
 import { getItem } from '../services/LocaleStorage';
 
@@ -19,6 +19,7 @@ const Navbar = () => {
     const {isAuthenticated, setIsAuthenticated} = useContext(Auth);
     const [lastName, setLastName] = useState("");
     const [firstName, setFirstName] = useState("");
+    const [isAdmin, setIsAdmin] = useState(hasAdminCredentials());
 
     useEffect (() => {
         const token = getItem(tokenName);
@@ -45,14 +46,11 @@ const Navbar = () => {
                 <div className='row' id='compte'>
                   { (!isAuthenticated && (
                     <>
-                        <span>
-                            <Link to={"/login"}>Connexion</Link>
-                            <Link to={"/login"}>Créer un compte</Link>
-                        </span>
+                        <span>Nous sommes ravis de faire votre connaissance !</span>
                     </>
                     )) || (
                         <>
-                            <div className='col'>Compte</div>
+                            <Link className='col' to={'/myAccount'}>Compte</Link>
                             <div className='col'>
                                 <div className='gold-color my-nav-item'>
                                     <button className="navbar-toggler " type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar">
@@ -94,15 +92,19 @@ const Navbar = () => {
                         
                                 <ul className='dropdown-menu menuUser' aria-labelledby="offcanvasNavbarDropdown">
                                     <li className='light-gold-color menuUserItem'>
-                                        <Link className="dropdown-item" to="#">
+                                        <Link className="dropdown-item" to="/sign">
                                         <img className='icon' src={addUserIco} alt='add user icon'/>
                                             Ajouter
-                                        </Link></li>
+                                        </Link>
+                                    </li>
                                     <li className='light-gold-color menuUserItem'>
-                                        <Link className="dropdown-item" to="#">
-                                            <img className='icon' src={listUserIco} alt='list user icon'/>
-                                            Liste
-                                        </Link></li>
+                                        {isAdmin ?
+                                            <Link className="dropdown-item" to={"/users"}>
+                                                <img className='icon' src={listUserIco} alt='list user icon'/>
+                                                Liste
+                                            </Link> : <></>
+                                        }
+                                    </li>
                                 </ul>
                             </li>
                             <hr/>

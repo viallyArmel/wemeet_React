@@ -27,7 +27,7 @@ export default class Event extends Component {
                 events : data,
                 eventsToShow : data
             });
-        });
+        }).catch(e => console.error(e));
 
         this.setState({loading : false});
     }
@@ -52,7 +52,6 @@ export default class Event extends Component {
 
     
     render() {
-
         const indexOfLastEvent = this.state.currentPage * this.state.eventsPerPage;
         const indexOfFirstEvent = indexOfLastEvent - this.state.eventsPerPage;
         const currentEvents = this.state.eventsToShow.slice(indexOfFirstEvent, indexOfLastEvent);

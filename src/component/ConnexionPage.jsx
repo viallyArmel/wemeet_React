@@ -29,7 +29,7 @@ const ConnexionPage = () => {
                 setIsAuthenticated(res);
                 window.location.replace('/home');
             }else {
-                setMsgError("You are not Administrator !");
+                setMsgError("You are not registered !");
                 setIsAuthenticated(false);
             }
         
@@ -84,7 +84,6 @@ const ConnexionPage = () => {
                     </div>
                 </div>
             </div>
-            <div className='vide'></div>
             <Footer/>
         </div>
     );

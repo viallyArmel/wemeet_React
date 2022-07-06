@@ -32,28 +32,30 @@ a:hover {
 }
 
 #inscription {
-    position: absolute;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    grid-template-rows: 1fr 1fr 1fr 1fr 1fr;
-    grid-template-areas: 
-    'la1 i1'
-    'la2 ta'
-    'la3 i2'
-    'la4 cb'
-    'bt bt';
-    border: 1px solid ;
-    margin: 12px;
-    padding: 2rem;
-    border-radius: 6px;
-    box-shadow: 0 0 3px #333;
-    width: 50%;
-    height: 600px;
-    left: 50%;
-    transform: translateX(-50%);
-    background: rgba(228, 228, 228, 0.349);
-    transition: 0.4s ease-in;
-    
+
+    #eventForm {
+        position: absolute;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: 1fr 1fr 1fr 1fr 1fr;
+        grid-template-areas:
+            'la1 i1'
+            'la2 ta'
+            'la3 i2'
+            'la4 cb'
+            'bt bt';
+        border: 1px solid ;
+        margin: 12px;
+        padding: 2rem;
+        border-radius: 6px;
+        box-shadow: 0 0 3px #333;
+        width: 50%;
+        height: 600px;
+        left: 50%;
+        transform: translateX(-50%);
+        background: rgba(228, 228, 228, 0.349);
+        transition: 0.4s ease-in;
+    }
 
     label {
        font-size: 19px;
@@ -62,8 +64,6 @@ a:hover {
     input[type="text"] {
         height: 45px;
         box-shadow: 0 0 5px rgba(0, 0, 0, 0.308);
-
-        
     }
     input, textarea {
         margin: 5px;
@@ -110,10 +110,11 @@ a:hover {
         transform: scale(0.95);
     }
     input[type="checkbox"] {
+        transform: translateY(-35px);
+        width : 5%;
         cursor: pointer;
         grid-area: cb;
     }
-   
 }
 
 #liveToast {

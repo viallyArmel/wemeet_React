@@ -71,6 +71,8 @@ export const EventDetails = () => {
     //event
     getEvent(id).then(res => {
       const event = res.data;
+      console.log(event);
+      console.log(event.participants);
 
       setCity_name(event.city_name);
       setDescription(event.description);
@@ -100,6 +102,7 @@ export const EventDetails = () => {
       const organizer = roles.filter(r => {
         return r.role === 'organizer';
       });
+      console.log(organizer);
 
       //user
       getUser(organizer[0].user).then(res => {
@@ -125,33 +128,33 @@ export const EventDetails = () => {
 
   const patchCalender = ({ eventId, oldDate, newDate, modal }) => {
     if (!acceptableDate(newDate, oldDate)) {
-      showAlert("Invalid date ! Maybe it has already passed !", modal, true);
+      showAlert("Invalid date ! Maybe it has already passed !", true, modal);
     } else {
 
       updateCalendar({ eventId, oldDate, newDate }).
-        then(res => showAlert(res.data.status, modal, false)).
-        catch(e => showAlert(e.message, modal, true));
+        then(res => showAlert(res.data.status, false, modal)).
+        catch(e => showAlert(e.message, true, modal));
     }
   }
 
   const remmoveCalendar = ({ eventId, date, modal }) => {
     deleteCalendar({ eventId, date }).
-      then(res => showAlert(res.data.status, modal, false)).
-      catch(e => showAlert(e.message, modal, true));
+      then(res => showAlert(res.data.status, false, modal)).
+      catch(e => showAlert(e.message, true, modal));
   }
 
   const postCalendar = ({ eventId, date, modal }) => {
     if (date === "" || !acceptableDate(date)) {
-      showAlert("Invalid date ! Maybe it has already passed !", modal, true);
+      showAlert("Invalid date ! Maybe it has already passed !", true, modal);
     } else {
 
       createCalendar({ eventId, date }).
-        then(res => showAlert(res.data.status, modal, false)).
-        catch(e => showAlert(e.message, modal, true));
+        then(res => showAlert(res.data.status, false, modal)).
+        catch(e => showAlert(e.message, true, modal));
     }
   }
 
-  const showAlert = (msg, modal, isError) => {
+  const showAlert = (msg, isError, modal) => {
     modal && handleClose(modal);
 
     if (isError) {
@@ -165,55 +168,55 @@ export const EventDetails = () => {
   }
 
   const patchEvent = ({ id, labelEvent, cityName, description, isPrivate, modal }) => {
-
     cityName && cityName.toLowerCase();
-    updateEvent(id, labelEvent, cityName, description, isPrivate).
-      then(res => {
-        showAlert(res.data.status, modal, false);
+    updateEvent(id, labelEvent, cityName, description, isPrivate)
+        .then(res => {
+        console.log("premier then : ", res);
+        showAlert(res.data.status, false, modal);
       }).catch(e => {
-        showAlert(e.message, modal, true);
+        console.log("on est entrés dans le catch...");
+        showAlert(e.message, true, modal);
       });
-
   };
 
   const removeSurvey = ({ id, modal }) => {
     deleteSurvey({ id, role }).
-      then(res => showAlert(res.data.status, modal, false)).
-      catch(e => showAlert(e.message, modal, true));
+      then(res => showAlert(res.data.status, false, modal)).
+      catch(e => showAlert(e.message, true, modal));
   }
 
   const patchSurvey = ({ id, label, modal }) => {
 
     updateSurvey({ id, label, role }).
-      then(res => showAlert(res.data.status, modal, false)).
-      catch(e => showAlert(e.message, modal, true));
+      then(res => showAlert(res.data.status, false, modal)).
+      catch(e => showAlert(e.message, true, modal));
   }
 
   const postSurvey = ({ event, label, description, modal }) => {
     createSurvey({ label, description, event, role }).
-      then(res => showAlert(res.data.status, modal, false)).
-      catch(e => showAlert(e.message, modal, true));
+      then(res => showAlert(res.data.status, false, modal)).
+      catch(e => showAlert(e.message, true, modal));
   }
 
   const patchSurveyLine = ({ label, nbVotes, survey, lineNumber, modal }) => {
 
     updateSurveyLine({ label, nbVotes, survey, lineNumber }).
-      then(res => showAlert(res.data.status, modal, false)).
-      catch(e => showAlert(e.message, modal, true));
+      then(res => showAlert(res.data.status, false, modal)).
+      catch(e => showAlert(e.message, true, modal));
   }
 
   const remmoveSurveyLine = ({ survey, lineNumber, modal }) => {
 
     deleteSurveyLine({ survey, lineNumber, role }).
-      then(res => showAlert(res.data.status, modal, false)).
-      catch(e => showAlert(e.message, modal, true));
+      then(res => showAlert(res.data.status, false, modal)).
+      catch(e => showAlert(e.message, true, modal));
   }
 
   const addSurveyLine = ({ survey, label, nbVotes, modal }) => {
 
     createSurveyLine({ survey, label, nbVotes, role }).
-      then(res => showAlert(res.data.status, modal, false)).
-      catch(e => showAlert(e.message, modal, true));
+      then(res => showAlert(res.data.status, false, modal)).
+      catch(e => showAlert(e.message, true, modal));
   }
 
   return (
@@ -281,7 +284,7 @@ export const EventDetails = () => {
           return (
             <div key={index} className='sondage'>
               <h3>
-                {s.title}
+                {s.label}
                 <span className='editIcon'><img src={editIco} alt='edit' onClick={() => {
                   setModalSurvey(true)
                   setSelectedSurvey(s);
@@ -397,9 +400,9 @@ export const EventDetails = () => {
         </div>
         <div className='content'>
           {toEdit ? (
-            <span><input type="text" name='labelSurvey' onChange={handleChange} defaultValue={selectedSurvey.title} /></span>
+            <span><input type="text" name='labelSurvey' onChange={handleChange} defaultValue={selectedSurvey.label} /></span>
           ) : (
-            <span className='title'> {selectedSurvey.title} </span>
+            <span className='title'> {selectedSurvey.label} </span>
           )}
         </div>
         <div className='zoneBtn'>
@@ -452,7 +455,9 @@ export const EventDetails = () => {
           {toEdit ? (
             <input type='submit' id='Modifier' onClick={() => {
               setToEdit(false);
-              eventDatas.labelSL !== "" && patchSurveyLine({ label: eventDatas.labelSL, nbVotes: eventDatas.nbVotes, survey: selectedSurveyLine.survey, lineNumber: selectedSurveyLine.line_number, modal: setModalSurveyLine });
+              eventDatas.labelSL === "" && eventDatas.nbVotes !== 0 && (eventDatas.labelSL = selectedSurveyLine.label);
+              eventDatas.nbVotes === 0 && eventDatas.labelSL !== "" && (eventDatas.nbVotes = selectedSurveyLine.nb_votes);
+              (eventDatas.labelSL !== "" || eventDatas.nbVotes !== 0) && patchSurveyLine({ label: eventDatas.labelSL, nbVotes: eventDatas.nbVotes, survey: selectedSurveyLine.survey, lineNumber: selectedSurveyLine.line_number, modal: setModalSurveyLine });
 
             }} value={"Valider modifications"} />
           ) : (
@@ -552,8 +557,10 @@ export const EventDetails = () => {
           {toEdit ? (
             <input type='submit' id='Modifier' onClick={() => {
               setToEdit(false);
-              eventDatas.description !== "" && patchEvent({ id, description: eventDatas.description, modal: setModalDescriptionEvent });
-
+              eventDatas.description !== "" && patchEvent({
+                id, description: eventDatas.description,
+                modal: setModalDescriptionEvent
+              });
             }} value={"Valider modifications"} />
           ) : (
             <input type='submit' id='Modifier' onClick={() => setToEdit(true)} value={"Modifier"} />
@@ -590,7 +597,12 @@ export const EventDetails = () => {
               setToEdit(false);
               if (eventDatas.labelEvent !== "" || is_private !== isPrivateCheckBox) {
                 is_private !== isPrivateCheckBox && eventDatas.labelEvent === "" && (eventDatas.labelEvent = label);
-                patchEvent({ id, labelEvent: eventDatas.labelEvent, modal: setModalLabelEvent, isPrivate: isPrivateCheckBox });
+                patchEvent({
+                  id,
+                  labelEvent: eventDatas.labelEvent,
+                  modal: setModalLabelEvent,
+                  isPrivate: isPrivateCheckBox
+                });
               }
 
             }} value={"Valider modifications"} />

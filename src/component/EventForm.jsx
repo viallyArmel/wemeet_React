@@ -75,25 +75,26 @@ const EventForm = () => {
                 <div className="background">
                     <h1 id="libellé">Créer un évènement</h1>
                     <BreadCrumb labels={["home", "Add event"]} endPoints={["/home"]} />
+                    <div id="inscription">
+                        <form id="eventForm" action="" onSubmit={saveEvent}>
 
-                    <form id="inscription" action="" onSubmit={saveEvent}>
+                            <label htmlFor="title">Titre * :</label>
+                            <input id="title" type="text" name="title" placeholder="titre de l'évènement" defaultValue={label} onChange={handleChange} required />
 
-                        <label htmlFor="title">Titre * :</label>
-                        <input id="title" type="text" name="title" placeholder="titre de l'évènement" defaultValue={label} onChange={handleChange} required />
+                            <label htmlFor="description">Description  : </label>
+                            <textarea id="description" name="description" placeholder="Plus de details (ex : adresse, heure, etc...)" onChange={handleChange}></textarea>
 
-                        <label htmlFor="description">Description  : </label>
-                        <textarea id="description" name="description" placeholder="Plus de details (ex : adresse, heure, etc...)" onChange={handleChange}></textarea>
+                            <label htmlFor="city">Ville * :</label>
+                            <input id="city" type="text" name="city" placeholder="ex : namur..." onChange={handleChange} required />
 
-                        <label htmlFor="city">Ville * :</label>
-                        <input id="city" type="text" name="city" placeholder="ex : namur..." onChange={handleChange} required />
+                            <label htmlFor="isPrivate">Rendre privé</label>
+                            <input type="checkbox" name="isPrivate" onChange={handleChange} />
 
-                        <label htmlFor="isPrivate">Rendre privé</label>
-                        <input type="checkbox" name="isPrivate" onChange={handleChange} />
-
-                        <div id="submit">
-                            <input type="submit" value="Enregistrer" />
-                        </div>
-                    </form>
+                            <div id="submit">
+                                <input type="submit" value="Enregistrer" />
+                            </div>
+                        </form>
+                    </div>
                 </div>
             </div>
 

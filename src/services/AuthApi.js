@@ -7,7 +7,11 @@ import { addItem, getItem, removeItem } from "./LocaleStorage";
 
 export const tokenName = 'wemeetToken';
 
-
+export function hasAdminCredentials() {
+    const token = getItem(tokenName);
+    const { status } = jwtDecode(token);
+    return status === "admin" && hasAuthenticated();
+}
 
 export function hasAuthenticated() {
     const token = getItem(tokenName);
@@ -26,7 +30,7 @@ export const login = async (userInfos) => {
         const token = response.data;
         addItem(tokenName, token);
         const { status } = jwtDecode(token);
-        return status === "admin";
+        return status === "admin" || "user";
     } catch (e) {
         return false;
     }
